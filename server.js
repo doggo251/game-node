@@ -32,6 +32,9 @@ io.on('connection', function(socket) {
 
     };
   });
+  socket.on('increase size', function() {
+    players[socket.id].r += 2;
+  });
   socket.on('shot fired', function(xG,yG,sX,sY,owner){
   	shotId = shortid.generate();
   	var moveX = xG - sX;

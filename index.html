@@ -2,6 +2,9 @@
   <head>
     <title>GGM8</title>
     <style>
+    body {
+      background-color : black;
+    }
       canvas {
         margin: auto;
         border: 1px solid black;
@@ -9,11 +12,23 @@
         background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Graph-paper.svg/1024px-Graph-paper.svg.png');
         background-color: #181b1e;
       }
+      button {
+        background-color: #1aa3ff;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
     </style>
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
+
     <canvas id="canvas"></canvas>
+
   </body>
   <script src="/static/game.js"></script>
 </html>

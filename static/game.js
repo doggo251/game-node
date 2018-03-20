@@ -16,6 +16,8 @@ socket.on('connect', function(){
 	console.log('client id: ' + cId);
 });
 var userName = prompt("enter a username");
+var tick = 0;
+var tickSize = 0;
 var movement = {
   up: false,
   down: false,
@@ -77,10 +79,17 @@ ctx.canvas.height = 600*yCoe;
 socket.on('state', function(players) {
   ctx.clearRect(0, 0, 800*xCoe, 600*yCoe);
 console.log('tick');
+	tick++;
+	tickSize++;
+	if(tickSize > 100){
+		socket.emit('increase size');
+		tickSize = 0;
+	}
   for (var id in players) {
   	ctx.fillStyle = 'green';
     var player = players[id];
     var radius = player.r;
+    if(radius > 1){
     ctx.beginPath();
     ctx.arc(player.x*xCoe, player.y*yCoe, radius*avgCoe, 0, 2 * Math.PI);
     ctx.fill(); 
@@ -92,7 +101,10 @@ console.log('tick');
     if(player.id == cId){
     	xNowi = player.x;
   		yNowi  = player.y;
+  	}
+
     }
+
 
   }
 
@@ -121,7 +133,11 @@ function getCursorPosition(canvas, event) {
     insX = x/xCoe;
     insY = y/yCoe;
     console.log("x: " + insX + " y: " + insY);
+
+    if(tick > 5){
     socket.emit('shot fired', insX, insY, xNowi, yNowi, cId);
+    tick = 0;
+	}	
 }
 
 
