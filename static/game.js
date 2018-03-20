@@ -80,11 +80,6 @@ socket.on('state', function(players) {
   ctx.clearRect(0, 0, 800*xCoe, 600*yCoe);
 console.log('tick');
 	tick++;
-	tickSize++;
-	if(tickSize > 100){
-		socket.emit('increase size');
-		tickSize = 0;
-	}
   for (var id in players) {
   	ctx.fillStyle = 'green';
     var player = players[id];
