@@ -6,15 +6,15 @@ var shortid = require('shortid');
 var app = express();
 var server = http.Server(app);
 var io = socketIO(server);
-app.set('port', 2800);
+app.set('port', 80);
 app.use('/static', express.static(__dirname + '/static'));
 // Routing
 app.get('/', function(request, response) {
   response.sendFile(path.join(__dirname, 'index.html'));
 });
 // Starts the server.
-server.listen(2800, function() {
-  console.log('Starting server on port 2800');
+server.listen(80, function() {
+  console.log('Starting server on port 80');
 });
 setInterval(function() {
 }, 1000);
