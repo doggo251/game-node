@@ -81,10 +81,23 @@ io.on('connection', function(socket) {
     	delete players[socket.id];
   });
 });
+var tick = 0;
 setInterval(function() {
   io.sockets.emit('state', players);
   io.sockets.emit('shotLoc', shots);
   io.sockets.emit('sendPlayers', players);
+  for(var id in players){
+  		if(tick > 60){
+  			players[id].r++;
+  			var happened = true;
+  		}
+  	}
+  	if(happened){
+  		tick = 0;
+  	}
+  	else{
+  		tick++;
+  	}
   for(var scan in shots){
   	shots[scan].shotX += shots[scan].xS;
   	shots[scan].shotY += shots[scan].yS;
